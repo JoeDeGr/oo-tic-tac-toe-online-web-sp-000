@@ -47,7 +47,7 @@ attr_accessor :board
            index = input_to_index(user_input)
            valid_move?(index)
        end
-       move(board, index, current_player)
+       move(index, current_player)
        display_board
      end
 
