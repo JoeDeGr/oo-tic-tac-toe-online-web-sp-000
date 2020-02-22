@@ -90,7 +90,7 @@ attr_accessor :board
     end
 
   def play
-    @board = Array.new (9, " ")
+    @board = (" ", " ", " ", " ", " ", " ", " ", " ", " ")
     until over? do
       turn
     end
