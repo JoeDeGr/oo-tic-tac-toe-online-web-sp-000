@@ -9,8 +9,9 @@ WIN_COMBINATIONS = [
   [2,5,8],
   [0,4,8],
   [2,4,6]]
-
-  def initialize
+attr_accessor :board
+  def initialize (board)
+    board = @board
     @board = (" ", " ", " ", " ", " ", " ", " ", " ", " ")
   end
   def display_board(board)
