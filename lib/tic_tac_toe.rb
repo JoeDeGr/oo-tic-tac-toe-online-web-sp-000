@@ -11,7 +11,7 @@ WIN_COMBINATIONS = [
   [2,4,6]]
 attr_accessor :board
   def initialize (board = nil)
-    @board = board || Array.new (9, " ")
+    @board = board
   end
   def display_board
     puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
@@ -90,6 +90,7 @@ attr_accessor :board
     end
 
   def play
+    @board = Array.new (9, " ")
     until over? do
       turn
     end
