@@ -21,7 +21,7 @@ attr_accessor :board
     puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
   end
   def input_to_index(user_input)
-  user_input = user_input.to_i - 1
+    user_input = user_input.to_i - 1
   end
 
   def move(index, player)
@@ -90,7 +90,6 @@ attr_accessor :board
     end
 
   def play
-    @board = (" ", " ", " ", " ", " ", " ", " ", " ", " ")
     until over? do
       turn
     end
