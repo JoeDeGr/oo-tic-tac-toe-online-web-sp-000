@@ -13,89 +13,89 @@ attr_accessor :board
   def initialize (board = nil)
   @board = board || @board = (" ", " ", " ", " ", " ", " ", " ", " ", " ")
   end
-  def display_board(board)
-    puts " #{board[0]} | #{board[1]} | #{board[2]} "
+  def display_board
+    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
     puts "-----------"
-    puts " #{board[3]} | #{board[4]} | #{board[5]} "
+    puts " #{@board[3]} | #{@board[4]} | #{@board[5]} "
     puts "-----------"
-    puts " #{board[6]} | #{board[7]} | #{board[8]} "
+    puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
   end
   def input_to_index(user_input)
   user_input = user_input.to_i - 1
   end
 
-  def move(board, index, player)
-    board[index] = player
+  def move(index, player)
+    @board[index] = player
   end
 
-  def position_taken?(board, index)
-    !(board[index].nil? || board[index] == " ")
+  def position_taken?(index)
+    !(@board[index].nil? || @board[index] == " ")
   end
 
-  def valid_move?(board, index)
+  def valid_move?(index)
     index =index.to_i
-     index.to_i.between?(0,8) && !position_taken?(board, index)
+     index.to_i.between?(0,8) && !position_taken?(index)
    end
 
-   def turn(board)
+   def turn
          puts "Please enter 1-9:"
          user_input = gets.strip
          index = input_to_index(user_input)
-         while valid_move?(board, index) == false do
+         while valid_move?(index) == false do
            puts "Please enter 1-9:"
            user_input = gets.strip
            index = input_to_index(user_input)
-           valid_move?(board, index)
+           valid_move?(index)
        end
-       move(board, index, current_player(board))
-       display_board(board)
+       move(board, index, current_player)
+       display_board
      end
 
-    def turn_count(board)
+    def turn_count
       counter = 0
-      board.count {|token| token == "X" || token == "O"}
+      @board.count {|token| token == "X" || token == "O"}
     end
 
-    def current_player(board)
-      turn_count(board) % 2 == 0 ? "X" : "O"
+    def current_player
+      turn_count % 2 == 0 ? "X" : "O"
     end
 
-    def won?(board)
+    def won?
        WIN_COMBINATIONS.each do |win_comb|
-          if [board[win_comb[0]], board[win_comb[1]], board[win_comb[2]]].all? {|i| i == board[win_comb[0]]} && position_taken?(board, win_comb[0] )
+          if [@board[win_comb[0]], @board[win_comb[1]], @board[win_comb[2]]].all? {|i| i == @board[win_comb[0]]} && position_taken?(@board, win_comb[0] )
            return win_comb
          end
        end
        false
     end
 
-    def full?(board)
-      !(board.any? {|i| [" ",""].include? i})
+    def full?
+      !(@board.any? {|i| [" ",""].include? i})
     end
 
-    def draw? (board)
-      full?(board) && !won?(board)
+    def draw?
+      full? && !won?
     end
 
-    def over?(board)
-      if draw?(board) || won?(board) || full?(board)
+    def over?
+      if draw? || won? || full?
         true
       end
     end
 
-    def winner(board)
-      if won?(board)
-        return board[won?(board)[0]]
+    def winner
+      if won?
+        return @board[won?(board)[0]]
       end
     end
 
-  def play(board)
-    until over?(board) do
-      turn(board)
+  def play
+    until over? do
+      turn
     end
-    if draw?(board)
+    if draw?
         puts "Cat's Game!"
-    else won?(board)
+    else won?
       puts "Congratulations #{winner(board)}!"
     end
   end
