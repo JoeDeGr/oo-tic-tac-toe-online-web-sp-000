@@ -12,6 +12,9 @@ WIN_COMBINATIONS = [
 attr_accessor :board
   def initialize(board = nil)
     @board = board || Array.new(9, " ")
+    puts "Welcome to TicTacToe!"
+    display_board
+    play
   end
 
   def display_board
