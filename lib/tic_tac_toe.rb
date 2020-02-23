@@ -13,6 +13,7 @@ attr_accessor :board
   def initialize(board = nil)
     @board = board || Array.new(9, " ")
   end
+  
   def display_board
     puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
     puts "-----------"
@@ -62,7 +63,7 @@ attr_accessor :board
 
     def won?
        WIN_COMBINATIONS.each do |win_comb|
-          if [@board[win_comb[0]], @board[win_comb[1]], @board[win_comb[2]]].all? {|i| i == @board[win_comb[0]]} && position_taken?(@board, win_comb[0] )
+          if [@board[win_comb[0]], @board[win_comb[1]], @board[win_comb[2]]].all? {|i| i == @board[win_comb[0]]} && position_taken?(win_comb[0] )
            return win_comb
          end
        end
