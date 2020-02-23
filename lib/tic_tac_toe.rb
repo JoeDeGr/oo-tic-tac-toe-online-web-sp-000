@@ -12,6 +12,7 @@ WIN_COMBINATIONS = [
 attr_accessor :board
   def initialize(board = nil)
     @board = board || Array.new(9, " ")
+    display_board
   end
 
   def display_board
